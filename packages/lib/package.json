@@ -1,0 +1,32 @@
+{
+  "name": "@dbfu/react-directive",
+  "version": "1.0.1",
+  "description": "在react项目使用指令，并且支持自定义指令。",
+  "main": "index.js",
+  "types": "./index.d.ts",
+  "scripts": {
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "directive",
+    "jsx-dev-runtime",
+    "jsx-runtime",
+    "useModel.d.ts",
+    "useModel.js",
+    "utils.js",
+    "package.json"
+  ],
+  "keywords": [
+    "directive"
+  ],
+  "author": "876809592@qq.com",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "lodash-es": "^4.17.21"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

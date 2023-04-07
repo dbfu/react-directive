@@ -1,0 +1,22 @@
+{
+  "name": "@dbfu/umi-example",
+  "private": true,
+  "author": "fudebao <fudebao@byteplan.com>",
+  "scripts": {
+    "dev": "umi dev",
+    "build": "umi build",
+    "postinstall": "umi setup",
+    "setup": "umi setup",
+    "start": "npm run dev"
+  },
+  "dependencies": {
+    "@dbfu/react-directive": "workspace:*",
+    "umi": "^4.0.64"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.18.6",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0"
+  }
+}
