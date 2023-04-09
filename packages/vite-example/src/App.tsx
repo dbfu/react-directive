@@ -5,7 +5,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 
-const Demo = forwardRef(({ onClick }: any, ref) => {
+const Demo = forwardRef((_, ref) => {
 
   useImperativeHandle(ref, () => {
     return {
@@ -22,7 +22,7 @@ const Demo = forwardRef(({ onClick }: any, ref) => {
 
 function App() {
   const [count, setCount] = useState(0)
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   const ref = React.createRef<any>();
 
@@ -30,15 +30,19 @@ function App() {
 
   return (
     <div className="App">
-      <Demo v-if={false} ref={ref} onClick={(value: string) => {
-        setShow(!show);
-      }} v-copy="4444" />
-      <input className='' />
-      <div className='' onClick={() => {
-        console.log(2222)
-        console.log(ref.current)
-      }} v-if="dddd">{model.name}</div>
-      <div v-model={[model, '222']}  style={{ display: 'inline-block' }} title='6666' v-show={323232}>
+      <Demo v-if={false} ref={ref} v-copy="4444" />
+      <input v-focus v-show={show} />
+      <div v-if={show} v-copy="44444">copy</div>
+      <div
+        onClick={() => {
+          console.log(2222)
+          console.log(ref.current)
+        }}
+        v-if="dddd"
+      >
+        {model.name}
+      </div>
+      <div v-model={[model, '222']} style={{ display: 'inline-block' }} title='6666' v-show={323232}>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -61,7 +65,7 @@ function App() {
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
-      <p className="read-the-docs">
+      <p style={{ height: 800 }} className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
     </div >

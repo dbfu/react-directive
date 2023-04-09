@@ -87,7 +87,6 @@ export default defineConfig({
 }
 ```
 
-
 然后就可以在项目中，使用框架内置的指令
 
 ```js
