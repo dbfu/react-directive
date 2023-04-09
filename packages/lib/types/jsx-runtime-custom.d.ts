@@ -1,14 +1,13 @@
 import 'react';
-import { ClassValue } from 'clsx';
 
-type CommonJSXProps = {
+type WithIntrinsicAttributesProps = {
   "v-if"?: boolean;
   "v-model"?: [Record<string, any>, string];
-};
-
-type WithIntrinsicAttributesProps = CommonJSXProps & {
   "v-show"?: boolean;
   "v-focus"?: any;
+  "v-text"?: string;
+  "v-html"?: string;
+  "v-copy"?: string;
 };
 
 // unpack all here to avoid infinite self-referencing when defining our own JSX namespace
@@ -31,10 +30,9 @@ export namespace CJSX {
     extends ReactJSXElementAttributesProperty {}
   interface ElementChildrenAttribute extends ReactJSXElementChildrenAttribute {}
 
-  type LibraryManagedAttributes<C, P> = CommonJSXProps &
-    ReactJSXLibraryManagedAttributes<C, P>;
+  type LibraryManagedAttributes<C, P> = WithIntrinsicAttributesProps & ReactJSXLibraryManagedAttributes<C, P>;
 
-  type IntrinsicAttributes = ReactJSXIntrinsicAttributes & CommonJSXProps;
+  type IntrinsicAttributes = ReactJSXIntrinsicAttributes & WithIntrinsicAttributesProps;
   
   interface IntrinsicClassAttributes<T>
     extends ReactJSXIntrinsicClassAttributes<T> {}

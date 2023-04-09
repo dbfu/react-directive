@@ -4,11 +4,17 @@ import { transformProps } from '../utils';
 import '../directive/default'
 
 function jsxDEV(type, config, maybeKey, source, self) {
-  console.log(config);
 
+  let _type = type;
+
+  const result = transformProps(config);
   // 如果返回false，则表示不渲染组件
-  if (transformProps(config) === false) {
+  if (result === false) {
     return null;
+  }
+
+  if (result) {
+    _type = result;
   }
 
   return jsxDEV_(type, config, maybeKey, source, self);

@@ -91,6 +91,7 @@ export default defineConfig({
 然后就可以在项目中，使用框架内置的指令
 
 ```js
+import useModel from '@dbfu/react-directive/useModel'
 function App() {
 
   const model = useModel({ name: "jack" });

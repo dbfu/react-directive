@@ -28,7 +28,6 @@ function execShowDirective(props, ref) {
 
 export const transformProps = (props) => {
 
-  console.log(directiveMap)
   const originProps = clone(props);
 
   for (let [key, handle] of directiveMap) {
@@ -80,6 +79,6 @@ export const transformProps = (props) => {
       }
     }
 
-    refMap.set(ref, originProps);
+    refMap.set(ref, props);
   }
 }
