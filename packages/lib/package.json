@@ -1,12 +1,11 @@
 {
   "name": "@dbfu/react-directive",
-  "version": "1.1.1",
+  "version": "1.1.4",
   "description": "在react项目使用指令，并且支持自定义指令。",
   "main": "index.js",
   "types": "./index.d.ts",
   "repository": "https://github.com/dbfu/react-directive",
-  "scripts": {
-  },
+  "scripts": {},
   "files": [
     "index.js",
     "index.d.ts",

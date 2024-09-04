@@ -1,4 +1,4 @@
-import { isFunction, clone } from 'lodash-es'
+import { clone, isFunction } from 'lodash-es';
 
 import { directiveMap } from './directive';
 
@@ -26,7 +26,7 @@ function execShowDirective(props, ref) {
   });
 }
 
-export const transformProps = (props) => {
+export const transformProps = (props, type) => {
 
   const originProps = clone(props);
 
@@ -42,43 +42,48 @@ export const transformProps = (props) => {
 
   const originRef = props.ref;
 
-  props.ref = (ref) => {
-    if (!ref) return;
 
-    const oldProps = refMap.get(ref);
-    if (oldProps) {
-      // 如果上一次display为none，当前不为none，则说明组件由隐藏变为显示，所以触发show事件
-      if ((oldProps?.style?.display === 'none' && originProps?.style?.display !== 'none')) {
-        execShowDirective(originProps, ref);
-      }
+  if (typeof type === 'string') {
+    props.ref = (ref) => {
+      if (!ref) return;
 
-      // 如果上一次display不为none，当前为none，则说明组件由显示变为隐藏，所以触发hidden事件
-      if ((oldProps?.style?.display !== 'none' && originProps?.style?.display === 'none')) {
-        execHiddenDirective(originProps, ref);
-      }
-    } else {
-      // 能获取到ref说明组件已经渲染了，并且只需要执行一次
-      directiveMap.forEach((handle, key) => {
-        if (originProps && hasOwnProperty.call(originProps, key)) {
-          handle?.mounted?.(ref, originProps[key], originProps, refMap.get(ref))
+      const oldProps = refMap.get(ref);
+      if (oldProps) {
+        // 如果上一次display为none，当前不为none，则说明组件由隐藏变为显示，所以触发show事件
+        if ((oldProps?.style?.display === 'none' && originProps?.style?.display !== 'none')) {
+          execShowDirective(originProps, ref);
         }
-      });
 
-      if ((originProps?.style?.display !== 'none')) {
-        execShowDirective(originProps, ref);
+        // 如果上一次display不为none，当前为none，则说明组件由显示变为隐藏，所以触发hidden事件
+        if ((oldProps?.style?.display !== 'none' && originProps?.style?.display === 'none')) {
+          execHiddenDirective(originProps, ref);
+        }
       } else {
-        execHiddenDirective(originProps, ref);
-      }
-    }
+        // 能获取到ref说明组件已经渲染了，并且只需要执行一次
+        directiveMap.forEach((handle, key) => {
+          if (originProps && hasOwnProperty.call(originProps, key)) {
+            handle?.mounted?.(ref, originProps[key], originProps, refMap.get(ref))
+          }
+        });
 
-    if (originRef) {
-      if (isFunction(originRef)) {
-        originRef(ref);
-      } else if (hasOwnProperty.call(originRef, 'current')) {
-        originRef.current = ref;
+        if ((originProps?.style?.display !== 'none')) {
+          execShowDirective(originProps, ref);
+        } else {
+          execHiddenDirective(originProps, ref);
+        }
       }
-    }
 
-    refMap.set(ref, props);
+      if (originRef) {
+        if (isFunction(originRef)) {
+          originRef(ref);
+        } else if (hasOwnProperty.call(originRef, 'current')) {
+          originRef.current = ref;
+        }
+      }
+
+      refMap.set(ref, props);
+    }
   }
+
+
 }

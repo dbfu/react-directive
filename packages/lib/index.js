@@ -4,7 +4,7 @@
 
 import React from 'react';
 
-export function createElement() {
+export function createElement(...args) {
   return React.createElement.apply(undefined, args);
 }
 
